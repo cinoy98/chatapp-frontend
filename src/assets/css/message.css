@@ -1,0 +1,96 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.recieved-box {
+    height: 450px;
+    align-items: left;
+    font-family: 'Ubuntu', sans-serif;
+    background: #3e4d7e;
+    font-size: calc(1px + 2vmin);
+  }
+
+  .sent-box {
+    height: 150px;
+    align-items: left;
+    font-family: 'Ubuntu', sans-serif;
+    background: #3b3b68;
+    font-size: calc(1px + 2vmin);
+  }
+  .send {
+    width: 100%;
+    position: absolute;
+    display: flex;
+  }
+  
+  .sendTerm {
+    width: 80%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  
+  .sendTerm:focus{
+    color: #000000;
+  }
+  
+  .sendButton {
+    position:absolute;
+    width: 60px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  ul {
+    background: #3399ff;
+ 
+  }
+  
+  
+  ul li {
+    background: #cce5ff;
+  }
+
+/* Container for flexboxes */
+section {
+  display: flex;
+}
+
+
+nav {
+  float: left;
+  background: #ccc;
+  padding: 20px;
+  height: 350px;
+  width: 20%;
+  overflow-y: scroll;
+}
+
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: right;
+  width:80%;
+  height: 350px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}

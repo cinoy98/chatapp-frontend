@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@1&display=swap');
+.Header {
+    display: flex;
+    height: 125px;
+    background-color: #3b5a97;
+    font-family: 'Changa One', cursive;
+    color: #ffffff;
+    font-size: calc(70px + 2vmin);
+  }
