@@ -12,7 +12,7 @@ class Message extends React.Component {
             isLoggedIn: false,
             username: "",
             userId: "",
-            reciever: "abi",
+            reciever: "",
             onlineUsers: []
         };
 
@@ -21,6 +21,7 @@ class Message extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.handleLoginClick = this.handleLoginClick.bind(this);
         this.client = client;
+        this.getUser = this.getUser.bind(this);
     }
 
     componentDidMount() {
@@ -59,7 +60,7 @@ class Message extends React.Component {
                     message
                 ));
                 console.log(`message recieved ${message.message} from ${message.from}`)
-                y.push(message.message);
+                y.push(`${message.from} : ${message.message}`);
                 this.setState({ messages: y });
             }
 
@@ -69,14 +70,7 @@ class Message extends React.Component {
                 this.setState({ onlineUsers: users });
                 console.log("users onlinelist state", this.state.onlineUsers);
             }
-            // if (message.type === "userId") {
-            //     let register = {
-            //         username: this.state.username,
-            //         type: "register",
-            //         userId: message.userId
-            //     }
-            //     client.send(JSON.stringify(register));
-            // }
+
         }.bind(this);
     }
     handleChange(event) {
@@ -112,6 +106,11 @@ class Message extends React.Component {
 
     }
 
+    getUser(event) {
+        event.preventDefault();
+        this.setState({ reciever: event.target.innerHTML });
+    }
+
     render() {
 
         return (
@@ -119,40 +118,30 @@ class Message extends React.Component {
                 <section>
                     <nav>
                         Friends list
+
                         <ul>
                             {this.state.onlineUsers.map((users, index) => (
-                                <li key={index}>{users}</li>
+                                <li key={index}>  <button key={index} onClick={this.getUser}>{users}</button></li>
                             ))}
                         </ul>
                     </nav>
                     <article>
-
+                                Chat
                         <ul>
                             {this.state.messages.map((message, index) => (
                                 <li key={index}>{message}</li>
                             ))}
                         </ul>
                     </article>
+                    <nav>
+                        Messages
+                    </nav>
                 </section>
                 <footer>
 
-                    <form onSubmit={this.loginHandler}>
-                        <input
-                            type='text'
-                            onChange={this.loginChangeHandler}
-                        />
-                        <input
-                            type='submit'
-                        />
-                    </form>
+                    <Loginbar isLoggedIn={this.state.isLoggedIn} loginHandler={this.loginHandler} loginChangeHandler={this.loginChangeHandler} />
                     <Status isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            YOU ::::
-                            <input type="text" onChange={this.handleChange} className="sendTerm" placeholder="enter your message here" />
-                            <input type="submit" value="send" className="sendButton" />
-                        </label>
-                    </form>
+                    <Messagebar isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
 
                 </footer>
             </div>
@@ -170,4 +159,31 @@ function Status(props) {
     }
 }
 
+function Messagebar(props) {
+    if (props.isLoggedIn) {
+        return (<form onSubmit={props.handleSubmit}>
+            <label>
+                YOU ::::
+                <input type="text" onChange={props.handleChange} className="sendTerm" placeholder="enter your message here" />
+                <input type="submit" value="send" className="sendButton" />
+            </label>
+        </form>)
+    }
+    return (<div></div>)
+}
+
+function Loginbar(props) {
+    if (!props.isLoggedIn) {
+        return (<form onSubmit={props.loginHandler}>
+            <input
+                type='text'
+                onChange={props.loginChangeHandler}
+            />
+            <input
+                type='submit'
+            />
+        </form>)
+    }
+    return (<div></div>)
+}
 export default Message;
