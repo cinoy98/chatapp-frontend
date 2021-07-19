@@ -221,11 +221,11 @@ function Messagebar(props) {
 
 function Loginbar(props) {
     if (!props.isLoggedIn) {
-        return (<form onSubmit={props.loginHandler}>
+        return (<form onSubmit={props.loginHandler}>Your name :: 
             <input
                 type='text'
                 onChange={props.loginChangeHandler}
-            />
+                placeholder="Enter your name here" />
             <input
                 type='submit'
             />
