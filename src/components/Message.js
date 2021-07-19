@@ -16,24 +16,22 @@ class Message extends React.Component {
             onlineUsers: []
         };
 
-        // this.handleNameChange = this.handleNameChange.bind(this);
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleLoginClick = this.handleLoginClick.bind(this);
         this.client = client;
         this.getUser = this.getUser.bind(this);
+
     }
 
     componentDidMount() {
         client.onerror = function () {
             console.log('Connection Error');
         };
-        // client.
+
         client.onopen = function () {
             console.log('WebSocket Client Connected');
-            // client.onmessage = function(id){
-            //     console.log(id.data);
-            // }
+
         };
 
         client.onclose = function () {
@@ -44,31 +42,47 @@ class Message extends React.Component {
             console.log("message recievet at client :", incoming.data);
             var message = JSON.parse(incoming.data);
             if (message.type == "userId") {
+
                 this.setState({ userId: message.userId });
+
+
             }
 
 
             if (message.type == "username") {
-                if (message.userId == this.state.userId) {
-                    this.setState({ username: message.username })
-                }
+
+                this.setState({ username: message.username });
+
             }
 
 
             if (message.type == "text") {
-                let y = this.state.messages.map((message) => (
+                let messageArray = [];
+                messageArray = this.state.messages.map((message) => (
                     message
                 ));
-                console.log(`message recieved ${message.message} from ${message.from}`)
-                y.push(`${message.from} : ${message.message}`);
-                this.setState({ messages: y });
+
+                let index = messageArray.findIndex((msg) => {
+                    return msg.from == message.from
+                })
+                let textMessage;
+                if (index == -1) {
+                    textMessage = {
+                        from: message.from,
+                        message: [`${message.from} : ${message.message}`]
+                    }
+                    messageArray.push(textMessage);
+                }
+                else {
+                    messageArray[index].message.push(`${message.from} : ${message.message}`);
+                }
+                this.setState({ messages: messageArray });
             }
 
             if (message.type == "online") {
                 let users = message.online;
                 console.log("users onlinelist", users);
                 this.setState({ onlineUsers: users });
-                console.log("users onlinelist state", this.state.onlineUsers);
             }
 
         }.bind(this);
@@ -86,6 +100,24 @@ class Message extends React.Component {
             type: "text"
         }
         console.log("message sent to server", info);
+        let messageArray = this.state.messages.map((message) => (
+            message
+        ));
+        let index = messageArray.findIndex((msg) => {
+            return msg.from == this.state.reciever
+        })
+        let textMessage;
+        if (index == -1) {
+            textMessage = {
+                from: this.state.reciever,
+                message: [`${this.state.username} : ${this.state.value}`]
+            }
+            messageArray.push(textMessage);
+        }
+        else {
+            messageArray[index].message.push(`${this.state.username} : ${this.state.value}`);
+        }
+        this.setState({ messages: messageArray });
         client.send(JSON.stringify(info));
         event.preventDefault();
     }
@@ -111,7 +143,22 @@ class Message extends React.Component {
         this.setState({ reciever: event.target.innerHTML });
     }
 
+
+
     render() {
+        let listItems = [];
+        let messageArray = [];
+
+        this.state.messages.forEach((recievedMessage) => {
+            if (this.state.reciever == recievedMessage.from) {
+                listItems = Object.values(recievedMessage.message);
+
+            }
+        })
+
+        listItems.forEach((msg) => {
+            messageArray.push(msg);
+        })
 
         return (
             <div>
@@ -126,15 +173,14 @@ class Message extends React.Component {
                         </ul>
                     </nav>
                     <article>
-                                Chat
+                        <p>{this.state.reciever}</p>
                         <ul>
-                            {this.state.messages.map((message, index) => (
-                                <li key={index}>{message}</li>
-                            ))}
+                            <Chat messageArray={messageArray} />
+                            {console.log("message in list", JSON.stringify(this.state.messages))}
                         </ul>
                     </article>
                     <nav>
-                        Messages
+                        Messages (coming soon)
                     </nav>
                 </section>
                 <footer>
@@ -144,7 +190,7 @@ class Message extends React.Component {
                     <Messagebar isLoggedIn={this.state.isLoggedIn} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
 
                 </footer>
-            </div>
+            </div >
 
         )
     }
@@ -185,5 +231,14 @@ function Loginbar(props) {
         </form>)
     }
     return (<div></div>)
+}
+
+function Chat(props) {
+
+    return (
+        props.messageArray.map((msg,index) => (
+            <p key ={index}>{msg}</p>
+        ))
+    )
 }
 export default Message;
