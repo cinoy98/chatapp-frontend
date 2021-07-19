@@ -39,7 +39,7 @@ class Message extends React.Component {
         };
 
         this.client.onmessage = function (incoming) {
-            console.log("message recievet at client :", incoming.data);
+
             var message = JSON.parse(incoming.data);
             if (message.type == "userId") {
 
@@ -81,7 +81,7 @@ class Message extends React.Component {
 
             if (message.type == "online") {
                 let users = message.online;
-                console.log("users onlinelist", users);
+             
                 this.setState({ onlineUsers: users });
             }
 
@@ -99,7 +99,7 @@ class Message extends React.Component {
             reciever: this.state.reciever,
             type: "text"
         }
-        console.log("message sent to server", info);
+
         let messageArray = this.state.messages.map((message) => (
             message
         ));
@@ -176,7 +176,7 @@ class Message extends React.Component {
                         <p>{this.state.reciever}</p>
                         <ul>
                             <Chat messageArray={messageArray} />
-                            {console.log("message in list", JSON.stringify(this.state.messages))}
+       
                         </ul>
                     </article>
                     <nav>
