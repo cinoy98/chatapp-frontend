@@ -165,7 +165,7 @@ class Message extends React.Component {
             <div>
                 <section>
                     <nav>
-                        Friends list
+                        People Online (click to start conversation)
 
                         <ul>
                             {this.state.onlineUsers.map((users, index) => (
