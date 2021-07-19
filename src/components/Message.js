@@ -82,7 +82,7 @@ class Message extends React.Component {
 
             if (message.type == "online") {
                 let users = message.online;
-             
+
                 this.setState({ onlineUsers: users });
             }
 
@@ -177,7 +177,7 @@ class Message extends React.Component {
                         <p>{this.state.reciever}</p>
                         <ul>
                             <Chat messageArray={messageArray} />
-       
+
                         </ul>
                     </article>
                     <nav>
@@ -237,8 +237,8 @@ function Loginbar(props) {
 function Chat(props) {
 
     return (
-        props.messageArray.map((msg,index) => (
-            <p key ={index}>{msg}</p>
+        props.messageArray.map((msg, index) => (
+            <li className="message" key={index}>{msg}</li>
         ))
     )
 }

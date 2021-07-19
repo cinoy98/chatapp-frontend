@@ -47,15 +47,18 @@
     cursor: pointer;
     font-size: 20px;
   }
-  
-  ul {
-    background: #3399ff;
- 
+
+  ul{
+    list-style-type: none;
   }
-  
-  
-  ul li {
-    background: #cce5ff;
+
+  ul li.message {
+    list-style-type: none;
+    border: 2px solid #ebd27f;
+    background-color: #cecf6c;
+    border-radius: 45px;
+    padding: 10px;
+    margin: 10px 0;
   }
 
 /* Container for flexboxes */
@@ -93,4 +96,18 @@ footer {
   padding: 10px;
   text-align: center;
   color: white;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 1px 1px;
+  cursor: pointer;
+  border-radius: 50px;
 }
