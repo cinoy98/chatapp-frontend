@@ -1,7 +1,7 @@
 import React from 'react';
 import "../assets/css/message.css";
 
-const client = new WebSocket('ws://chatapp-backend-nodejs.herokuapp.com/');
+const client = new WebSocket('wss://chatapp-backend-nodejs.herokuapp.com/');
 
 class Message extends React.Component {
 
