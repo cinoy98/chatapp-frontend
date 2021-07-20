@@ -1,52 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.recieved-box {
-    height: 450px;
-    align-items: left;
-    font-family: 'Ubuntu', sans-serif;
-    background: #3e4d7e;
-    font-size: calc(1px + 2vmin);
-  }
 
-  .sent-box {
-    height: 150px;
-    align-items: left;
-    font-family: 'Ubuntu', sans-serif;
-    background: #3b3b68;
-    font-size: calc(1px + 2vmin);
-  }
-  .send {
-    width: 100%;
-    position: absolute;
-    display: flex;
-  }
-  
-  .sendTerm {
-    width: 80%;
-    border: 3px solid #00B4CC;
-    border-right: none;
-    padding: 5px;
-    height: 20px;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    color: #9DBFAF;
-  }
-  
-  .sendTerm:focus{
-    color: #000000;
-  }
-  
-  .sendButton {
-    position:absolute;
-    width: 60px;
-    height: 36px;
-    border: 1px solid #00B4CC;
-    background: #00B4CC;
-    text-align: center;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 20px;
-  }
 
   ul{
     list-style-type: none;
@@ -96,18 +49,4 @@ footer {
   padding: 10px;
   text-align: center;
   color: white;
-}
-
-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  margin: 1px 1px;
-  cursor: pointer;
-  border-radius: 50px;
 }
