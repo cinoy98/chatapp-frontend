@@ -17,7 +17,7 @@
 /* Container for flexboxes */
 section {
   display: flex;
-  height: inherit;
+  height: 438px;
 }
 
 
@@ -25,7 +25,7 @@ nav {
   float: left;
   background: #ccc;
   padding: 20px;
-  height: 350px;
+  height: 438px;
   width: 20%;
   overflow-y: scroll;
 }
@@ -39,7 +39,7 @@ nav ul {
 article {
   float: right;
   width:80%;
-  height: 350px;
+  height: 438px;
   background-color: #f1f1f1;
   padding: 20px;
   overflow-y: scroll;

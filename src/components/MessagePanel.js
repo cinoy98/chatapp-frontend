@@ -22,7 +22,10 @@ function Chat(props) {
         )
     }
     else {
-        return (<img src="https://github.com/cinoy98/chatapp-frontend/blob/main/src/assets/images/tenor.gif" />)
+        return (
+            <div className = "welcome"><h4>Welcome</h4>
+                <img src="https://raw.githubusercontent.com/cinoy98/chatapp-frontend/main/src/assets/images/tenor.gif" height= "auto"/></div>
+            )
     }
 
 }
@@ -47,7 +50,7 @@ function User(props) {
         return (
             <li className="you">
                 <div className="entete">
-                    <h3>10:12AM, Today</h3>
+                    <h3>{new Date().toLocaleTimeString()}</h3>
                     <h2>{props.message.from}</h2>
                     <span className="status blue"></span>
                 </div>
