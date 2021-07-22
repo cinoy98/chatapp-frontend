@@ -17,7 +17,8 @@ class Message extends React.Component {
             username: "",
             userId: "",
             reciever: "",
-            onlineUsers: []
+            onlineUsers: [],
+            userReady: false
         };
 
 
@@ -25,10 +26,13 @@ class Message extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.client = client;
         this.getUser = this.getUser.bind(this);
-
     }
 
+    componentDidUpdate() {
+
+    }
     componentDidMount() {
+
         client.onerror = function () {
             console.log('Connection Error');
         };
@@ -68,18 +72,28 @@ class Message extends React.Component {
                 if (index == -1) {
                     textMessage = {
                         from: message.from,
-                        message: [`${message.from} : ${message.message}`]
+                        message: [{
+                            from: message.from,
+                            message: message.message
+                        }]
                     }
                     messageArray.push(textMessage);
                 }
                 else {
-                    messageArray[index].message.push(`${message.from} : ${message.message}`);
+                    messageArray[index].message.push({
+                        from: message.from,
+                        message: message.message
+                    });
                 }
                 this.setState({ messages: messageArray });
             }
 
             if (message.type == "online") {
                 let users = message.online;
+                const index = users.indexOf(this.state.username);
+                if (index > -1) {
+                    users.splice(index, 1);
+                }
                 this.setState({ onlineUsers: users });
             }
 
@@ -110,12 +124,18 @@ class Message extends React.Component {
         if (index == -1) {
             textMessage = {
                 from: this.state.reciever,
-                message: [`${this.state.username} : ${this.state.value}`]
+                message: [{
+                    from: this.state.username,
+                    message: this.state.value
+                }]
             }
             messageArray.push(textMessage);
         }
         else {
-            messageArray[index].message.push(`${this.state.username} : ${this.state.value}`);
+            messageArray[index].message.push({
+                from: this.state.username,
+                message: this.state.value
+            });
         }
         this.setState({ messages: messageArray });
         client.send(JSON.stringify(info));
@@ -143,6 +163,7 @@ class Message extends React.Component {
     getUser(event) {
         event.preventDefault();
         this.setState({ reciever: event.target.innerHTML });
+        this.setState({ userReady: true })
     }
 
 
@@ -150,7 +171,6 @@ class Message extends React.Component {
     render() {
         let listItems = [];
         let messageArray = [];
-
         this.state.messages.forEach((recievedMessage) => {
             if (this.state.reciever == recievedMessage.from) {
                 listItems = Object.values(recievedMessage.message);
@@ -169,12 +189,13 @@ class Message extends React.Component {
                             People Online (click to start conversation)
                             <Online onlineUsers={this.state.onlineUsers} getUser={this.getUser} />
                         </nav>
-                        <article>
-                            <p>{this.state.reciever}</p>
+                        <article >
+                        
                             <ul>
-                                <Chat messageArray={messageArray} />
+                                <Chat messageArray={messageArray} user={this.state.username} friend={this.state.reciever} ready = {this.state.userReady}/>
 
                             </ul>
+
                         </article>
                         <nav>
                             Messages (coming soon)

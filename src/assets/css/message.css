@@ -17,6 +17,7 @@
 /* Container for flexboxes */
 section {
   display: flex;
+  height: inherit;
 }
 
 
