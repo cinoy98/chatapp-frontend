@@ -186,7 +186,7 @@ class Message extends React.Component {
                 <div>
                     <section>
                         <nav>
-                            People Online (click to start conversation)
+                            FRIENDS
                             <Online onlineUsers={this.state.onlineUsers} getUser={this.getUser} />
                         </nav>
                         <article >
@@ -197,9 +197,6 @@ class Message extends React.Component {
                             </ul>
 
                         </article>
-                        <nav>
-                            Messages (coming soon)
-                        </nav>
                     </section>
                     <footer>
                         <Status isLoggedIn={this.state.isLoggedIn} username={this.state.username} />

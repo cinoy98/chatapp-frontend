@@ -23,9 +23,9 @@ function Chat(props) {
     }
     else {
         return (
-            <div className = "welcome"><h4>Welcome</h4>
-                <img src="https://raw.githubusercontent.com/cinoy98/chatapp-frontend/main/src/assets/images/tenor.gif" height= "auto"/></div>
-            )
+            <div className="welcome">
+            </div>
+        )
     }
 
 }
