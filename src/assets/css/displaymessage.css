@@ -68,9 +68,9 @@ main header h3{
 }
 
 .welcome {
-    width:600px;
-    height:300px;  
-    background-image: url(https://raw.githubusercontent.com/cinoy98/chatapp-frontend/main/src/assets/images/starttheconvo1.jpg);
-    background-repeat: no-repeat;
-    background-position: top center;
+    width:900px;
+    height:375px;  
+    /* background-image: url(https://raw.githubusercontent.com/cinoy98/chatapp-frontend/main/src/assets/images/starttheconvo1.jpg); */
+    background-repeat:repeat;
+    background-position: center;
 }

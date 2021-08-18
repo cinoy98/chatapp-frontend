@@ -24,6 +24,7 @@ function Chat(props) {
     else {
         return (
             <div className="welcome">
+                Please click on friend to start converstation
             </div>
         )
     }
